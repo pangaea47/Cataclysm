@@ -16,6 +16,11 @@ SMODS.Atlas {
     py = 23
 };
 
+SMODS.Sound({
+	key = "clytuse",
+	path = "cataclysmcarduse.ogg",
+	pitch = 1.0,
+})
 --- Cataclysm Cards Consumable Type
 SMODS.ConsumableType {
     key = "Cataclysm",
@@ -140,6 +145,7 @@ CLYT.Cataclysm = SMODS.Consumable:extend{
             end
         else
             if card.config.center.use_inactive then card.config.center.use_inactive(self, card) end
+            play_sound("clyt_clytuse")
             card.ability.rounds_remaining = card.ability.rounds
             G.consumeables:remove_card(card);
             G.clyt_cataclysms:emplace(card);
@@ -360,7 +366,7 @@ CLYT.Cataclysm {
                 for _, joker in pairs(G.jokers.cards) do
                     joker:add_sticker("eternal",true)
                     joker:juice_up(0.3, 0.5)
-                    play_sound('tarot1')
+                    play_sound(tarot1)
                 end
             return true
         end
